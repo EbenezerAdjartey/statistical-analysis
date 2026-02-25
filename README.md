@@ -1,5 +1,7 @@
 # Statistical Analysis Portfolio
 
+[![Test Jupyter Notebooks](https://github.com/EbenezerAdjartey/statistical-analysis/actions/workflows/test-notebooks.yml/badge.svg)](https://github.com/EbenezerAdjartey/statistical-analysis/actions/workflows/test-notebooks.yml)
+
 A comprehensive collection of statistical analysis implementations across three platforms:
 **Python (Jupyter Notebooks)**, **R scripts**, and **Stata do-files**.
 
