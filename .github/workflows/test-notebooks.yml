@@ -24,12 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install \
-            numpy pandas scipy statsmodels \
-            scikit-learn matplotlib seaborn \
-            lifelines arch linearmodels \
-            xgboost shap \
-            jupyter nbmake pytest
+          pip install -r requirements.txt
 
       - name: Test descriptive statistics notebook
         env:
