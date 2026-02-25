@@ -1,0 +1,92 @@
+name: Test Jupyter Notebooks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-notebooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            numpy pandas scipy statsmodels \
+            scikit-learn matplotlib seaborn \
+            lifelines arch linearmodels \
+            xgboost shap \
+            jupyter nbmake pytest
+
+      - name: Test descriptive statistics notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 01_descriptive_statistics/descriptive_statistics.ipynb --nbmake-timeout=300 -v
+
+      - name: Test probability distributions notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 02_probability_distributions/probability_distributions.ipynb --nbmake-timeout=300 -v
+
+      - name: Test hypothesis testing notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 03_hypothesis_testing/hypothesis_testing.ipynb --nbmake-timeout=300 -v
+
+      - name: Test regression analysis notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 04_regression_analysis/regression_analysis.ipynb --nbmake-timeout=300 -v
+
+      - name: Test time series analysis notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 05_time_series_analysis/time_series_analysis.ipynb --nbmake-timeout=300 -v
+
+      - name: Test panel data analysis notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 06_panel_data_analysis/panel_data_analysis.ipynb --nbmake-timeout=300 -v
+
+      - name: Test survival analysis notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 07_survival_analysis/survival_analysis.ipynb --nbmake-timeout=300 -v
+
+      - name: Test nonparametric methods notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 08_nonparametric_methods/nonparametric_methods.ipynb --nbmake-timeout=300 -v
+
+      - name: Test multivariate analysis notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 09_multivariate_analysis/multivariate_analysis.ipynb --nbmake-timeout=300 -v
+
+      - name: Test Bayesian statistics notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 10_bayesian_statistics/bayesian_statistics.ipynb --nbmake-timeout=300 -v
+
+      - name: Test supervised learning notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 11_machine_learning/supervised_learning.ipynb --nbmake-timeout=300 -v
+
+      - name: Test model evaluation notebook
+        env:
+          MPLBACKEND: Agg
+        run: pytest --nbmake 12_model_evaluation/model_evaluation.ipynb --nbmake-timeout=300 -v
